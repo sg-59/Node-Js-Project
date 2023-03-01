@@ -1,0 +1,25 @@
+<div class="container w-50 " id="allUsers">
+    <table class="table table-striped">
+
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Mobile</th>
+      <th scope="col">Address</th>
+    </tr>
+  </thead>
+  <tbody>
+     {{#each users}}
+    <tr>
+       <td><img src="/imageProfile/{{this._id}}.jpg" style="width: 6em; height: 6em; border-radius: 2em;"></td>
+      <td>{{this.Name}}</td>
+      <td>{{this.Email}}</td>
+      <td>{{this.Mobile}}</td>
+      <td>{{this.Address}}</td>
+       
+    </tr>
+   {{/each}}
+  </tbody>
+</table>
+</div>

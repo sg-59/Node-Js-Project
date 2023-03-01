@@ -1,0 +1,38 @@
+<div class="container" id="cart">
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Item</th>
+      <th scope="col">Name</th>
+      <th scope="col">Model</th>
+       <th scope="col">Price</th>
+      <th scope="col">Quantity</th>
+      <th scope="col"></th>
+     
+    </tr>
+  </thead>
+  <tbody>
+    {{#each products}}
+    <tr>
+      <td><img src="/images/{{this.product._id}}.jpg" style="width: 5em; height: 5em;"></td>
+      <td>{{this.product.Name}}</td>
+      <td>{{this.product.Model}}</td>
+      <td>{{this.product.Price}}</td>
+      <td>
+        <button style="background: none; border:none ; color: rgb(69, 159, 219); font-size: 1.5em; " class="me-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',1)"><i class="bi bi-plus-circle-fill" style="font-size:1em;"></i></button>
+      <span id="{{this.product._id}}">{{this.quantity}}</span>
+      <button  style="background: none; border:none ;color: rgb(69, 159, 219); font-size: 2em; " class="ms-3" onclick="changeQuantity('{{this._id}}','{{this.product._id}}','{{../user._id}}',-1)" ><i class="bi bi-dash-circle-fill" style="font-size:.8em;"></i></button>
+      </td>
+      <td><button onclick="removeItems('{{this._id}}','{{this.product._id}}')" class="btn btn-danger">Delete</button></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+<hr>
+<div style="text-align: center;" class="mt-5">
+  <h4>Total Amount ₹  : <span id="totalAmount">{{total}}</span>/-</h4>
+  {{#if products}}
+<a href="/place-order" class=" btn  Button2">Buy</a>
+{{/if}}
+</div>
+</div>

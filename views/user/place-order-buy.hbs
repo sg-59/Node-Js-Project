@@ -1,0 +1,272 @@
+<div class="container w-50 " style="margin-top: 7em;" >
+  
+<div class="row ">
+  <div class="col-md-8 mb-4 " style="line-height: 2px;">
+    <div class="card mb-4 bg-transparent">
+      <div class="card-header py-3">
+        <h5 class="mb-0" style="text-align: center;">Delivery Details</h5>
+      </div>
+      <div class="card-body">
+        <form action="" method="" id="checkout-form-buy">
+          <!-- 2 column grid layout with text inputs for the first and last names -->
+          <div class="row mb-4">
+            <div class="col">
+              <div class="form-outline">
+                 <label id="firstnamecheck" class="mb-3 text-danger">At least 3 character</label>
+                <input type="text" id="firstname" class="form-control" placeholder="First name" name="firstname">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-outline">
+                <input type="text" id="lastname" class="form-control" placeholder="Last name" name="lastname">
+              </div>
+            </div>
+          </div>
+
+          <!-- Text input -->
+          <div class="form-outline mb-4">
+              <label id="addresscheck" class="mb-3 text-danger">Please enter valid Address</label>
+            <input type="text" id="address" class="form-control" placeholder="Address" name="address">
+         
+          </div>
+               <div class="form-outline mb-4">
+                  <label id="pincheck" class="mb-3 text-danger">Please Enter Valid pin number</label>
+            <input type="text" id="address-pin" class="form-control" placeholder="PIN" name="pin">
+         
+          </div>
+
+          <!-- Email input -->
+          <div class="form-outline mb-4">
+               <label id="emailcheck" class="mb-3 text-danger">Please enter valid email</label>
+            <input type="email" id="emails" class="form-control" placeholder="Email" name="email">
+          </div>
+
+          <!-- Number input -->
+          <div class="form-outline mb-4">
+            <label id="mobilecheck" class="mb-3 text-danger">Please enter the valid mobilenumber</label>
+            <input type="number" id="mobile" class="form-control" placeholder="Mobile" name="mobile">
+            <input type="text" name="userId" value="{{user._id}}" hidden>
+            <input type="text" name="proId" value="{{product._id}}" hidden>
+
+          </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4 mb-4">
+    <div class="card mb-4 bg-transparent">
+      <div class="card-header py-3">
+        <h6 class="mb-3">Total Amount..{{product.Price}}/-</h6>
+        <p class="mb-0" style="text-align: center;">Payment method</p>
+      </div>
+      <div class="card-body ">
+  <div class="form-check">
+  <input class="form-check-input" type="radio" name="payment-method" value="cod" id="radioone">
+  <label class="form-check-label" for="radioone">
+    COD
+  </label>
+</div>
+<div class="form-check">
+  <input class="form-check-input" type="radio" name="payment-method" value="onlinepayment" id="radiotwo">
+  <label class="form-check-label" for="radiotwo">
+    Online payment
+  </label>
+     
+</div>
+<input type="text" placeholder="Enter coupen code" name="coupenCode" class="mt-3  bg-danger text-white">
+        <button type="submit" class="btn btn-danger text-white mt-5 mb-0" >
+          Checkout
+        </button>
+      </div>
+   
+    </div>
+  </div>
+  </form>
+</div>
+
+</div>
+
+
+<script>
+      $('#checkout-form-buy').submit((e)=>{
+    e.preventDefault()
+    $.ajax({
+      url:'/place-order-buy',
+      method:'post',
+      data:$('#checkout-form-buy').serialize(),
+      success:(response)=>{
+        if(response.codSuccess){
+          location.href='/order-successful'
+        }else{
+          razorpayByBuy(response)
+        }
+      }
+    })
+  })
+
+  function razorpayByBuy(order){
+var options = {
+    "key": "rzp_test_pKLRENWxgUTNjV", // Enter the Key ID generated from the Dashboard
+    "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+    "currency": "INR",
+    "name": "Lap-Cart",
+    "description": "Test Transaction",
+    "image": "https://thumbs.dreamstime.com/z/trade-symbol-ways-arrow-laptop-logo-designs-vector-design-171844391.jpg",
+    "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+    "handler": function (response){   
+        razorpayVerify(response,order)
+
+    },
+    "prefill": {
+        "name": "Gaurav Kumar",
+        "email": "gaurav.kumar@example.com",
+        "contact": "9000090000"
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+    rzp1.open();
+  }
+  
+ function razorpayVerify(payment,order){
+$.ajax({
+  url:'/verify-payment',
+  data:{
+    payment,
+    order
+  },
+  method:'post',
+  success:(response)=>{
+    if(response.status){
+       location.href='/order-successful'
+    }else{
+      location.href='/ '
+    }
+  }
+
+})
+ }
+
+</script>
+
+
+
+<script>
+$(document).ready(function () {
+    //validate name
+    $("#firstnamecheck").hide();
+    let fnameerror = true;
+    $("#firstname").keyup(function () {
+        validatefnames();
+    });
+    function validatefnames() {
+        let fnamevalue = $("#firstname").val();
+        if (fnamevalue.length == "2" || fnamevalue.length=='1' ) {
+            $("#firstnamecheck").show();
+            fnameerror = false;
+            return false;
+
+        } else if (fnamevalue.length > 20) {
+            $("#firstnamecheck").show();
+            fnameerror = false;
+            return false;
+        } else {
+            $("#firstnamecheck").hide();
+        }
+    }
+    //validate mobile number
+    $("#mobilecheck").hide();
+    let mobnumerror = true;
+    $("#mobile").keyup(function () {
+        validatemobNum();
+    });
+    function validatemobNum() {
+        let mobNumvalue = $("#mobile").val();
+        if (mobNumvalue.length != 10) {
+            $("#mobilecheck").show();
+            mobnumerror = false;
+            return false;
+
+        }
+         else {
+            $("#mobilecheck").hide();
+        }
+    }
+
+    //validate E-mail
+    $("#emailcheck").hide();
+    let emailerror= true;
+    $("#emails").blur(function(){
+        validateEmails();
+    });
+    function validateEmails(){
+        let emailvalue=$("#emails").val();
+        let r= /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
+        if(r.test(emailvalue)){
+            $("#emailcheck").hide();
+        
+        }else{
+        $("#emailcheck").show();
+    
+       
+        }
+    }
+
+    //validate address
+    $("#addresscheck").hide();
+    let addresserror=true;
+    $("#address").keyup(function(){
+        validateaddress();
+    })
+    function validateaddress(){
+        let addressvalue=$("#address").val();
+        if(addressvalue.length==2){
+            $("#addresscheck").show(); 
+            addresserror=false
+            return false
+        }else{
+            $("#addresscheck").hide(); 
+        }
+    }
+  // validate pin number
+    $("#pincheck").hide();
+    let pinerror=true;
+    $("#address-pin").keyup(function(){
+        validatepin();
+    })
+    function validatepin(){
+        let pinvalue=$("#address-pin").val();
+        if(pinvalue.length>6 || pinvalue.length<6){
+            $("#pincheck").show(); 
+            pinerror=false
+            return false
+        }else{
+            $("#pincheck").hide(); 
+        }
+    }
+// submit
+
+$("#submit").click(function(){
+    validatefnames();
+    validatemobNum();
+    validateEmails();
+    validateaddress();
+    validatepin();
+ 
+    if(fnameerror==true && emailerror== true && mobnumerror==true && addresserror== true && pinerror==true){
+        return true;
+    }else{
+        return false;
+    }
+});
+
+
+
+});
+
+</script>

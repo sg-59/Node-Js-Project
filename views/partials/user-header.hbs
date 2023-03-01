@@ -1,0 +1,57 @@
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-light" id="navBar">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item  List_item">
+        <a class="nav-link  Alist" href="/"><i class="bi bi-house-add-fill icons"></i>Home</a>
+        </li>
+        <li class="nav-item  List_item">
+          <a class="nav-link  Alist"  href="/cart" ><i class="bi bi-cart4 icons"></i>Cart<span class="badge text-bg-dark ms-2" id="countOfcart">{{cartCount}}</span></a>
+        </li>
+        <li class="nav-item List_item">
+          <a class="nav-link Alist" href="/myordersList"><i class="bi bi-person-fill icons"></i>My Order-List</a>
+        </li>
+        <li class="nav-item dropdown List_item">
+          <a class="nav-link dropdown-toggle Alist" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+           <i class="bi bi-filter icons"></i> Price-Filter
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="/LtH">Low to High</a></li>
+            <li><a class="dropdown-item" href="/HtL">High to Low</a></li>
+          </ul>
+        </li>
+        
+ <li class="nav-item List_item">
+          <a class="nav-link Alist" href="/profile"><i class="bi bi-person-badge icons"></i>Profile</a>
+        </li>
+  </ul>
+
+      <button class="nav-item dropdown" id="Btn" >
+          <a class="nav-link dropdown-toggle"  id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+             {{#if user}}
+    {{user.Name}}
+    {{else}}
+            Account
+            {{/if}}
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            {{#if user}}
+            <li><a class="dropdown-item" href="/logout">Logout</a></li>
+            {{else}}
+            <li><a class="dropdown-item" href="/login">Login</a></li>
+            {{/if}}
+          </ul>
+      </button>
+
+
+    
+   
+    </div>
+</nav>
+</div>
+
+
+

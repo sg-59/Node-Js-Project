@@ -1,0 +1,42 @@
+ 
+ <div class="container" id="table">
+    <table class="table  border-dark" id="myordercanceltable">
+<h3 style="font-weight: 400; text-align: center;">Cancelled Order details</h3>
+  <thead>
+    <tr>
+      
+      <th scope="col">Time</th>
+      <th scope="col">Name</th>
+      <th scope="col">Address</th>
+      <th scope="col">Mobile</th>
+      <th scope="col">UserId</th>
+      <th scope="col">Total Price</th>
+      <th scope="col">Payment Method</th>
+      <th scope="col">View product</th>
+      
+      
+
+    </tr>
+  </thead>
+  <tbody>
+    {{#each data}}
+    <tr>
+      <td>{{this.Date}}</td>
+      <td>{{this.deliveryStatus.Name}}</td>
+      <td>{{this.deliveryStatus.Address}}</td>
+      <td>{{this.deliveryStatus.Mobile}}</td>
+      <td>{{this.UserId}}</td>
+      <td>{{this.Total}}</td>
+      <td>{{this.Paymentmethod}}</td>
+     <td><a href="/viewProduct/{{this._id}}" class="btn btn-info">Products</a></td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+</div>
+
+<script>
+  $(document).ready( function () {
+$('#myordercanceltable').DataTable();
+} );
+</script>

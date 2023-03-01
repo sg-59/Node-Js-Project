@@ -1,0 +1,116 @@
+<div class="container w-50 mb-3 " id="signup">
+    <h2 class="mb-3" style="text-align: center;">Signup form</h2>
+    <form action="/signup" method="post" enctype="multipart/form-data">
+<div class="mb-3">
+  <label for="formGroupExampleInput" class="form-label">Name</label> <span><label class="ms-5 text-danger" id="firstnamecheck">At least 3 character</label></span>
+  <input type="text" id="firstname" class="form-control "  placeholder="Name" name="Name" required>
+</div>
+<div class="mb-3">
+  <label for="formGroupExampleInput" class="form-label">Mobile Number</label> <span><label class="ms-5 text-danger" id="mobilecheck">Please enter valid mobile number</label></span>
+  <input type="text" id="mobile" class="form-control"  placeholder="Mobile Number" name="Mobile" required>
+</div>
+<div class="mb-3">
+  <label for="formGroupExampleInput" class="form-label">Permenent Address</label>
+  <input type="text" id="address" class="form-control"  placeholder="Permenent Address" name="Address" required>
+</div>
+<div class="mb-3">
+  <label for="formGroupExampleInput2" class="form-label">Email</label> <span><label class="ms-5 text-danger" id="emailcheck">Please enter valid E-mail</label></span>
+  <input type="email" id="emails" class="form-control"  placeholder="Email" name="Email" required>
+</div>
+<div class="mb-3">
+  <label for="formGroupExampleInput2" class="form-label">Password</label> 
+  <input type="password" class="form-control" id="formGroupExampleInput2" placeholder="Password" name="Password" required>
+</div>
+<div class="mb-3">
+  <label for="formGroupExampleInput2" class="form-label">Image</label>
+  <input type="file" class="form-control" id="formGroupExampleInput2" placeholder="Image" name="Images" required>
+</div>
+<div class="mb-3" style="text-align: center;">
+  <input type="submit" class="btn btn-success" >
+</div>
+<a href="/login" style="text-decoration: none;">already have an account ?</a>
+</form>
+</div>
+
+<script>
+  
+$(document).ready(function () {
+    //validate name
+    $("#firstnamecheck").hide();
+    let fnameerror = true;
+    $("#firstname").keyup(function () {
+        validatefnames();
+    });
+    function validatefnames() {
+        let fnamevalue = $("#firstname").val();
+        if (fnamevalue.length == "2" || fnamevalue.length=='1' ) {
+            $("#firstnamecheck").show();
+            fnameerror = false;
+            return false;
+
+        } else if (fnamevalue.length > 20) {
+            $("#firstnamecheck").show();
+            fnameerror = false;
+            return false;
+        } else {
+            $("#firstnamecheck").hide();
+        }
+    }
+    //validate mobile number
+    $("#mobilecheck").hide();
+    let mobnumerror = true;
+    $("#mobile").keyup(function () {
+        validatemobNum();
+    });
+    function validatemobNum() {
+        let mobNumvalue = $("#mobile").val();
+        if (mobNumvalue.length != 10) {
+            $("#mobilecheck").show();
+            mobnumerror = false;
+            return false;
+
+        }
+         else {
+            $("#mobilecheck").hide();
+        }
+    }
+
+    //validate E-mail
+    $("#emailcheck").hide();
+    let emailerror= true;
+    $("#emails").blur(function(){
+        validateEmails();
+    });
+    function validateEmails(){
+        let emailvalue=$("#emails").val();
+        let r= /^([_\-\.0-9a-zA-Z]+)@([_\-\.0-9a-zA-Z]+)\.([a-zA-Z]){2,7}$/;
+        if(r.test(emailvalue)){
+            $("#emailcheck").hide();
+        
+        }else{
+        $("#emailcheck").show();
+    
+       
+        }
+    }
+
+
+// submit
+
+$("#submit").click(function(){
+    validatefnames();
+    validatemobNum();
+    validateEmails();
+ 
+    if(fnameerror==true && emailerror== true && mobnumerror==true ){
+        return true;
+    }else{
+        return false;
+    }
+});
+
+
+
+});
+
+</script>

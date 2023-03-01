@@ -1,0 +1,65 @@
+
+<div class="container-fluid viewProducts">
+    <div class="row">
+      {{#if cartProducts}}
+       {{#each cartProducts}}
+        <div class="card me-3" style="width:14rem; ms-4 bg-info" id="card">
+  <img src="/images/{{this.product._id}}.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h6 class="card-title">{{this.product.Name}}</h6>
+     <h6 class="card-title">Price   :{{this.product.Price}}</h6>
+     <h6 class="card-title">Model name    :{{this.product.Model}}</h6>
+     <h6 class="card-title">Quantity   :{{this.quantity}}</h6>
+  </div>
+</div>
+ {{/each}}
+ {{else}}
+
+        {{#each buyProducts}}
+        <div class="card me-3" style="width:14rem; ms-4 bg-info" id="card">
+  <img src="/images/{{this._id._id}}.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h6 class="card-title"> {{this._id.Name}}</h6>
+     <h6 class="card-title">price    :{{this._id.Price}}</h6>
+     <h6 class="card-title">Model   :{{this._id.Model}}</h6>
+     <h6 class="card-title">Quantity   :{{this._id.quantity}}</h6>
+  </div>
+</div>
+ {{/each}}
+{{/if}}
+    </div> 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{!-- 
+<div class="container-fluid viewProducts">
+    <div class="row">
+        {{#each buyProducts}}
+        <div class="card me-3" style="width:14rem; ms-4 bg-info" id="card">
+  <img src="/images/{{this._id._id}}.jpg" class="card-img-top" alt="...">
+  <div class="card-body">
+    <h6 class="card-title"> {{this._id.Name}}</h6>
+     <h6 class="card-title">price    :{{this._id.Price}}</h6>
+     <h6 class="card-title">Model   :{{this._id.Model}}</h6>
+     <h6 class="card-title">Quantity   :{{this._id.quantity}}</h6>
+  </div>
+</div>
+ {{/each}}
+     </div>
+</div> --}}
+
+
+
+

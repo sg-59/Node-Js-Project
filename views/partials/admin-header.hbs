@@ -1,0 +1,45 @@
+<div class="container-fluid">
+    <header>
+        <nav class="navbar navbar-expand-lg " id="navBaradmin">
+    <a class="navbar-brand Alist ms-5" href="/admin/view-product">Admin Section</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 adminHeadings"> 
+        <li class="nav-item ms-5">
+          <a class="nav-link Alist1" aria-current="page" href="/admin/view-product"><i class="bi bi-laptop icons"></i>All products</a>
+        </li>
+        <li class="nav-item ms-5">
+          <a class="nav-link Alist1" aria-current="page" href="/admin/allorders"><i class="bi bi-truck icons"></i>All orders</a>
+        </li>
+        <li class="nav-item ms-5">
+          <a class="nav-link Alist1" aria-current="page" href="/admin/allusers"><i class="bi bi-people icons"></i>All users</a>
+        </li>
+         <li class="nav-item ms-5">
+          <a class="nav-link Alist1" aria-current="page" href="/admin/add-product"><i class="bi bi-plus-circle icons"></i>Add New product</a>
+        </li>
+         </li>
+         <li class="nav-item ms-5">
+          <a class="nav-link Alist1" aria-current="page" href="/admin/adminSignup"><i class="bi bi-person-plus icons"></i>Invite new admin</a>
+        </li>
+           <li class="nav-item ms-5">
+          <a class="nav-link Alist1" aria-current="page" href="/admin/cancelorders"><i class="bi bi-x-octagon icons"></i>Cancel Order Details</a>
+        </li>
+      </ul>
+        
+  
+    
+          <div class="dropdown">
+  <button class="btn  dropdown-toggle" id="Btn1" style="width: 10em;" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+    {{admin.Name}}
+  </button>
+  <ul class="dropdown-menu"> 
+ <li><a class="dropdown-item" href="/admin/adminLogout">Logout</a></li>
+</ul>
+</div>
+
+    </div>
+</nav>
+    </header>
+</div>

@@ -1,0 +1,39 @@
+<div class="container w-50 mb-3" id="editProfile">
+    <h2 class="mb-3" style="text-align: center;">Profile Edit form</h2>
+    <form action="/editProfile" method="post" enctype="multipart/form-data">
+<div class="mb-3">
+  <label for="formGroupExampleInput" class="form-label">Name</label>
+  <input type="text" class="form-control" id="formGroupExampleInput" value={{user.Name}} name="Name">
+</div>
+<div class="mb-3">
+  <label for="formGroupExampleInput" class="form-label">Mobile Number</label>
+  <input type="number" class="form-control" id="formGroupExampleInput" value={{user.Mobile}}  name="Mobile">
+</div>
+<div class="mb-3">
+  <label for="formGroupExampleInput" class="form-label">Permenent Address</label>
+  <input type="text" class="form-control" id="formGroupExampleInput" value={{user.Address}} name="Address">
+</div>
+<div class="mb-3">
+  <label for="formGroupExampleInput2" class="form-label">Email</label>
+  <input type="email" class="form-control" id="formGroupExampleInput2" value={{user.Email}} name="Email">
+</div>
+<div class="mb-3">
+  <label for="formGroupExampleInput2" class="form-label">Password</label>
+  <input type="password" class="form-control" id="formGroupExampleInput2" value={{user.Password}} name="Password">
+</div>
+<div class="mb-3">
+  <label for="formGroupExampleInput2" class="form-label">Image</label>
+  <img src="/imageProfile/{{user._id}}.jpg" style="width: 9em; height: 9em;" id="updateimg">
+  <input type="file" class="form-control" name="Images" onchange="updateview(event)">
+</div>
+<div class="mb-3" style="text-align: center;">
+  <input type="submit" class="btn btn-success" >
+</div>
+</form>
+</div>
+
+<script>
+  function updateview(event){
+    document.getElementById('updateimg').src=URL.createObjectURL(event.target.files[0]);
+  }
+</script>
